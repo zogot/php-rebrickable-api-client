@@ -12,30 +12,30 @@ composer require zogot/rebrickable-api-client
 ## Implemented
 
 ### Lego Data
-| Endpoint | Implemented |
-| -------- | ----------- |
-| /api/v3/lego/colors/ | (/) |
-| /api/v3/lego/colors/{id}/ | (x) |
-| /api/v3/lego/elements/{element_id}/ | (x) |
-| /api/v3/lego/minifigs/ | (x) |
-| /api/v3/lego/minifigs/{set_num}/ | (x) |
-| /api/v3/lego/minifigs/{set_num}/parts/ | (x) |
-| /api/v3/lego/minifigs/{set_num}/sets/ | (x) |
-| /api/v3/lego/minifigs/part_categories/ | (x) |
-| /api/v3/lego/minifigs/part_categories/{id}/ | (x) |
-| /api/v3/lego/minifigs/parts/ | (x) |
-| /api/v3/lego/minifigs/parts/{part_num}/ | (x) |
-| /api/v3/lego/minifigs/parts/{part_num}/colors/ | (x) |
-| /api/v3/lego/minifigs/parts/{part_num}/colors/{color_id}/ | (x) |
-| /api/v3/lego/minifigs/parts/{part_num}/colors/{color_id}/sets/ | (x) |
-| /api/v3/lego/minifigs/sets/ | (x) |
-| /api/v3/lego/minifigs/sets/{set_num}/ | (x) |
-| /api/v3/lego/minifigs/sets/{set_num}/alternates/ | (x) |
-| /api/v3/lego/minifigs/sets/{set_num}/minifigs/ | (x) |
-| /api/v3/lego/minifigs/sets/{set_num}/parts/ | (x) |
-| /api/v3/lego/minifigs/sets/{set_num}/sets/ | (x) |
-| /api/v3/lego/minifigs/themes/ | (x) |
-| /api/v3/lego/minifigs/themes/{id}/ | (x) |
+| Endpoint | Path | Implemented |
+| -------- | ----------- | ---- |
+| /api/v3/lego/colors/ | [GetColors](src/Lego/Color/Request/GetColors.php) | ✔️ |
+| /api/v3/lego/colors/{id}/ | GetColorsById | ❌ |
+| /api/v3/lego/elements/{element_id}/ | GetElementById | ❌ |
+| /api/v3/lego/minifigs/ | GetMinifigs | ❌ |
+| /api/v3/lego/minifigs/{set_num}/ | GetMinifigById | ❌ |
+| /api/v3/lego/minifigs/{set_num}/parts/ | GetMinifigPartsById | ❌ |
+| /api/v3/lego/minifigs/{set_num}/sets/ | GetMinifigSetsById | ❌ |
+| /api/v3/lego/minifigs/part_categories/ | GetPartCategories | ❌ |
+| /api/v3/lego/minifigs/part_categories/{id}/ | GetPartCategoryById | ❌ |
+| /api/v3/lego/minifigs/parts/ | GetParts | ❌ |
+| /api/v3/lego/minifigs/parts/{part_num}/ | GetPartByNumber | ❌ |
+| /api/v3/lego/minifigs/parts/{part_num}/colors/ | GetPartColor | ❌ |
+| /api/v3/lego/minifigs/parts/{part_num}/colors/{color_id}/ | GetPartColorCombination | ❌ |
+| /api/v3/lego/minifigs/parts/{part_num}/colors/{color_id}/sets/ | GetPartColorCombinationSets | ❌ |
+| /api/v3/lego/minifigs/sets/ | GetSets | ❌ |
+| /api/v3/lego/minifigs/sets/{set_num}/ | GetSetsById | ❌ |
+| /api/v3/lego/minifigs/sets/{set_num}/alternates/ | GetAlternatesForSet | ❌ |
+| /api/v3/lego/minifigs/sets/{set_num}/minifigs/ | GetMinifigsInSet | ❌ |
+| /api/v3/lego/minifigs/sets/{set_num}/parts/ | GetPartsInSet | ❌ |
+| /api/v3/lego/minifigs/sets/{set_num}/sets/ | GetInventorySetsInSet | ❌ |
+| /api/v3/lego/minifigs/themes/ | GetThemes | ❌ |
+| /api/v3/lego/minifigs/themes/{id}/ | GetThemesById | ❌ |
 
 ### Users
 Coming soon
