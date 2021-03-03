@@ -1,0 +1,67 @@
+#!/usr/bin/env php
+<?php
+
+use GuzzleHttp\Psr7\Request;
+use Http\Client\Curl\Client;
+use Http\Factory\Guzzle\ResponseFactory;
+use Http\Factory\Guzzle\StreamFactory;
+use Psr\Http\Message\RequestInterface;
+
+// Read argv for the API key
+$apiKey = $argv[1] ?? "";
+
+if(empty($apiKey)) {
+    echo "Usage:" . PHP_EOL;
+    echo "build-responses <api-key>" . PHP_EOL;
+    echo "------" . PHP_EOL;
+    echo "Generate an API Key here: https://rebrickable.com/api/" . PHP_EOL;
+    exit(1);
+}
+
+$outputDirectory = realpath(__DIR__ . "/../tests/fixtures");
+
+// Autoload
+require_once "vendor/autoload.php";
+
+// Boot Http Client
+$client = new Client(new ResponseFactory(), new StreamFactory());
+
+$headers = [
+    "Authorization" => "key $apiKey",
+];
+
+// Make the request for each of these
+$requests = [
+    function(array $headers): RequestInterface {
+        return new Request("GET","https://rebrickable.com/api/v3/lego/themes/", $headers);
+    },
+    function(array $headers): RequestInterface {
+        return new Request("GET", "https://rebrickable.com/api/v3/lego/colors/", $headers);
+    },
+    function(array $headers): RequestInterface {
+        return new Request("GET", "https://rebrickable.com/api/v3/lego/sets/", $headers);
+    }
+];
+
+foreach($requests as $requestClosure) {
+    try {
+        /** @var RequestInterface $request */
+        $request = $requestClosure($headers);
+        $requestPath = $request->getUri()->getPath();
+
+        $response = $client->sendRequest($request);
+        $responseContents = $response->getBody()->getContents();
+
+        // Output to file
+        $responseParsed = json_decode($responseContents);
+        $filename = str_replace(["/"], ["-"], trim($requestPath, "/")) . ".json";
+        file_put_contents("$outputDirectory/$filename", json_encode($responseParsed, JSON_PRETTY_PRINT));
+
+        echo "Processed $requestPath" . PHP_EOL;
+    } catch(Exception $exception) {
+        var_dump($exception);
+    }
+}
+
+echo "Done" . PHP_EOL;
+echo "- Find all the fixtures in $outputDirectory" . PHP_EOL;
