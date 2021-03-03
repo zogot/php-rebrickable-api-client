@@ -68,7 +68,7 @@ class RebrickableClient
      */
     public function setBaseUrl(string $baseUrl): self
     {
-        $this->baseUrl = rtrim($baseUrl, "/");
+        $this->baseUrl = rtrim(string: $baseUrl, characters: "/");
         return $this;
     }
 
