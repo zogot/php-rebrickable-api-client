@@ -1,5 +1,5 @@
 <?php declare(strict_types=1);
-namespace Zogot\Rebrickable\API\Client\Common\Request;
+namespace Zogot\Rebrickable\API\Client;
 
 use Psr\Http\Message\RequestInterface;
 

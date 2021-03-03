@@ -6,7 +6,7 @@ use Psr\Http\Client\ClientInterface;
 use Psr\Http\Message\RequestFactoryInterface;
 use Psr\Http\Message\RequestInterface;
 use Psr\Http\Message\ResponseInterface;
-use Zogot\Rebrickable\API\Client\Common\Request\RebrickableRequestInterface;
+use Zogot\Rebrickable\API\Client\RebrickableRequestInterface;
 use Zogot\Rebrickable\API\Client\RebrickableClient;
 
 class RebrickableClientTest extends TestCase
@@ -26,7 +26,6 @@ class RebrickableClientTest extends TestCase
             ->getMock();
 
         $this->client = new RebrickableClient($this->psrClient, $this->requestFactory);
-
     }
 
     public function testSendRequest()

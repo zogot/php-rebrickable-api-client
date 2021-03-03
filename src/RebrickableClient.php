@@ -5,7 +5,6 @@ use Psr\Http\Client\ClientExceptionInterface;
 use Psr\Http\Client\ClientInterface;
 use Psr\Http\Message\RequestFactoryInterface;
 use Psr\Http\Message\ResponseInterface;
-use Zogot\Rebrickable\API\Client\Common\Request\RebrickableRequestInterface;
 use function rtrim;
 
 class RebrickableClient
