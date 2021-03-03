@@ -47,9 +47,14 @@ class RebrickableClient
     public function send(RebrickableRequestInterface $rebrickableRequest): ResponseInterface
     {
         $requestMethod = $rebrickableRequest->getMethod();
-        $requestPath = $this->buildUrl($rebrickableRequest->getPath());
+        $requestPath   = $this->buildUrl($rebrickableRequest->getPath());
 
+        // Create the request from the supplied request factory
         $request = $this->requestFactory->createRequest($requestMethod, $requestPath);
+
+        // Allow the rebrickable request to modify the RequestInterface before executing, to attach all
+        // needed data
+        $request = $rebrickableRequest->beforeRequest($request);
 
         return $this->client->sendRequest($request);
     }
