@@ -53,7 +53,7 @@ class GetColors implements RebrickableRequestInterface
      */
     public function getPath(): string
     {
-        $path = "/api/v3/lego/colors";
+        $path = "/api/v3/lego/colors/";
 
         $queryParameters = [];
 

@@ -25,7 +25,7 @@ class RebrickableClientTest extends TestCase
         $this->requestFactory = $this->getMockBuilder(RequestFactoryInterface::class)
             ->getMock();
 
-        $this->client = new RebrickableClient($this->psrClient, $this->requestFactory);
+        $this->client = new RebrickableClient($this->psrClient, $this->requestFactory, "1234567");
     }
 
     public function testSendRequest()
@@ -46,8 +46,20 @@ class RebrickableClientTest extends TestCase
         $requestMock = $this->getMockBuilder(RequestInterface::class)
             ->getMock();
 
+        $rebrickableRequestMock
+            ->expects($this->once())
+            ->method("beforeRequest")
+            ->with($requestMock)
+            ->willReturn($requestMock);
+
         $responseMock = $this->getMockBuilder(ResponseInterface::class)
             ->getMock();
+
+        $requestMock
+            ->expects($this->once())
+            ->method('withHeader')
+            ->with("Authorization", "key 1234567")
+            ->willReturn($requestMock);
 
         $this->requestFactory
             ->expects($this->once())
@@ -84,8 +96,20 @@ class RebrickableClientTest extends TestCase
         $requestMock = $this->getMockBuilder(RequestInterface::class)
             ->getMock();
 
+        $rebrickableRequestMock
+            ->expects($this->once())
+            ->method("beforeRequest")
+            ->with($requestMock)
+            ->willReturn($requestMock);
+
         $responseMock = $this->getMockBuilder(ResponseInterface::class)
             ->getMock();
+
+        $requestMock
+            ->expects($this->once())
+            ->method('withHeader')
+            ->with("Authorization", "key 1234567")
+            ->willReturn($requestMock);
 
         $this->requestFactory
             ->expects($this->once())
@@ -122,8 +146,20 @@ class RebrickableClientTest extends TestCase
         $requestMock = $this->getMockBuilder(RequestInterface::class)
             ->getMock();
 
+        $rebrickableRequestMock
+            ->expects($this->once())
+            ->method("beforeRequest")
+            ->with($requestMock)
+            ->willReturn($requestMock);
+
         $responseMock = $this->getMockBuilder(ResponseInterface::class)
             ->getMock();
+
+        $requestMock
+            ->expects($this->once())
+            ->method('withHeader')
+            ->with("Authorization", "key 1234567")
+            ->willReturn($requestMock);
 
         $this->requestFactory
             ->expects($this->once())
@@ -168,6 +204,59 @@ class RebrickableClientTest extends TestCase
 
         $responseMock = $this->getMockBuilder(ResponseInterface::class)
             ->getMock();
+
+        $requestMock
+            ->expects($this->once())
+            ->method('withHeader')
+            ->with("Authorization", "key 1234567")
+            ->willReturn($requestMock);
+
+        $this->requestFactory
+            ->expects($this->once())
+            ->method("createRequest")
+            ->with("GET", "https://rebrickable.com/api/v3/lego/colors/")
+            ->willReturn($requestMock);
+
+        $this->psrClient
+            ->expects($this->once())
+            ->method("sendRequest")
+            ->willReturn($responseMock);
+
+        $this->client->send($rebrickableRequestMock);
+    }
+
+    public function testApiKeyIsAttached()
+    {
+        $rebrickableRequestMock = $this->getMockBuilder(RebrickableRequestInterface::class)
+            ->getMock();
+
+        $rebrickableRequestMock
+            ->expects($this->once())
+            ->method("getPath")
+            ->willReturn("/api/v3/lego/colors/");
+
+        $rebrickableRequestMock
+            ->expects($this->once())
+            ->method("getMethod")
+            ->willReturn("GET");
+
+        $requestMock = $this->getMockBuilder(RequestInterface::class)
+            ->getMock();
+
+        $rebrickableRequestMock
+            ->expects($this->once())
+            ->method("beforeRequest")
+            ->with($requestMock)
+            ->willReturn($requestMock);
+
+        $responseMock = $this->getMockBuilder(ResponseInterface::class)
+            ->getMock();
+
+        $requestMock
+            ->expects($this->once())
+            ->method('withHeader')
+            ->with("Authorization", "key 1234567")
+            ->willReturn($requestMock);
 
         $this->requestFactory
             ->expects($this->once())

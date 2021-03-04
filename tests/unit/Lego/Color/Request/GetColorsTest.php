@@ -26,13 +26,13 @@ class GetColorsTest extends TestCase
 
     public function testGetPath()
     {
-        $this->assertEquals("/api/v3/lego/colors", $this->request->getPath());
+        $this->assertEquals("/api/v3/lego/colors/", $this->request->getPath());
     }
 
     public function testGetPathWithQueryArguments()
     {
         $request = new GetColors(page: 2, pageSize: 5, orderingField: "name");
-        $this->assertEquals("/api/v3/lego/colors?page=2&page_size=5&ordering=name", $request->getPath());
+        $this->assertEquals("/api/v3/lego/colors/?page=2&page_size=5&ordering=name", $request->getPath());
     }
 
     public function testBeforeRequest()

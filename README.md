@@ -9,6 +9,21 @@ composer require zogot/rebrickable-api-client
 
 ## Usage
 
+```php
+<?php
+require_once "vendor/autoload.php";
+
+use Zogot\Rebrickable\API\Client\Lego\Color\Request\GetColors;
+use Zogot\Rebrickable\API\Client\RebrickableClient;
+
+// Take a Psr Client. For example from php-http/curl-client and request factory from http-interop/http-factory-guzzle
+$rebrickableClient = new RebrickableClient($psrClient, $psrRequestFactory, "api-key");
+
+// Send the request, using one of the defined Request classes in the table below. Take advantage of the PHP8 ability
+// to reference the specific argument by its name.
+$response = $rebrickableClient->send(new GetColors(pageSize: 50));
+```
+
 ## Implemented
 
 ### Lego Data

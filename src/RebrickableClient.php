@@ -22,17 +22,24 @@ class RebrickableClient
     /**
      * @var string
      */
+    protected string $apiKey;
+
+    /**
+     * @var string
+     */
     protected string $baseUrl = "https://rebrickable.com";
 
     /**
      * RebrickableClient constructor.
      * @param ClientInterface $client
      * @param RequestFactoryInterface $requestFactory
+     * @param string $apiKey
      */
-    public function __construct(ClientInterface $client, RequestFactoryInterface $requestFactory)
+    public function __construct(ClientInterface $client, RequestFactoryInterface $requestFactory, string $apiKey)
     {
         $this->client = $client;
         $this->requestFactory = $requestFactory;
+        $this->apiKey = $apiKey;
     }
 
     /**
@@ -50,6 +57,9 @@ class RebrickableClient
 
         // Create the request from the supplied request factory
         $request = $this->requestFactory->createRequest($requestMethod, $requestPath);
+
+        // Attach the Authorization header
+        $request = $request->withHeader("Authorization", "key {$this->apiKey}");
 
         // Allow the rebrickable request to modify the RequestInterface before executing, to attach all
         // needed data

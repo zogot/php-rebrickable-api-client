@@ -28,6 +28,7 @@ $client = new Client(new ResponseFactory(), new StreamFactory());
 
 $headers = [
     "Authorization" => "key $apiKey",
+    "Accept" => "application/json",
 ];
 
 // Make the request for each of these
