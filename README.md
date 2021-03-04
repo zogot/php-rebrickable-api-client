@@ -29,8 +29,8 @@ $response = $rebrickableClient->send(new GetColors(pageSize: 50));
 ### Lego Data
 | Endpoint | Path | Implemented |
 | -------- | ----------- | ---- |
-| /api/v3/lego/colors/ | [GetColors](src/Lego/Color/Request/GetColors.php) | ✔️ |
-| /api/v3/lego/colors/{id}/ | GetColorsById | ❌ |
+| /api/v3/lego/colors/ | [GetColors](src/Lego/Color/Request/GetColors.php) | ✔️|
+| /api/v3/lego/colors/{id}/ | [GetColorsById](src/Lego/Color/Request/GetColorsById.php) | ✔️|
 | /api/v3/lego/elements/{element_id}/ | GetElementById | ❌ |
 | /api/v3/lego/minifigs/ | GetMinifigs | ❌ |
 | /api/v3/lego/minifigs/{set_num}/ | GetMinifigById | ❌ |
